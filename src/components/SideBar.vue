@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-full relative">
+  <aside class="w-full relative p-4">
     <RouterLink to="/shop" class="absolute top-4 right-4 text-sm font-bold bg-black px-5 py-2 rounded-xl text-white hover:bg-amber-700">To Shop</RouterLink>
     <div>
       <h3 class="font-semibold mb-4">Filters</h3>
