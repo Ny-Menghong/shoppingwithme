@@ -24,7 +24,7 @@
       <!-- Quick Add Button -->
       <div class="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
         <button
-          @click.stop="addToCart"
+          @click.stop="addToCart()"
           class="w-full py-3 bg-black text-white text-sm font-semibold tracking-wide hover:bg-gray-800 transition"
         >
           + Add to Cart
@@ -72,6 +72,7 @@ const discountedPrice = computed(() => {
 })
 
 const addToCart = () => {
+  alert('Added to cart!')
   cart.addItem(props.product)
 }
 </script>

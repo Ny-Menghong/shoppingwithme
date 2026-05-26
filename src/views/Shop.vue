@@ -111,12 +111,26 @@ import Footer from '../components/Footer.vue'
 import ProductCard from '../components/ProductCard.vue'
 import { products } from '../data/products'
 import { useDarkMode } from '../stores/DarkMode'
+import { useSearchStore } from '../stores/SearchStore'
+import { onUnmounted } from 'vue'
+import { useMenuFilter } from '../stores/MenuFilter';
 
+const useMenu = useMenuFilter();
+const searchStore = useSearchStore();
 const DarkMode = useDarkMode()
-const selectedCat = ref('All')
+const selectedCat = ref(computed({
+  get() {
+    return useMenu.menu
+  },
+
+  set(value) {
+    useMenu.menu = value
+  }
+}))
 const selectedType = ref('All')
 const sortBy = ref('default')
 const newInOnly = ref(false)
+
 
 const categories = computed(() => ['All', ...new Set(products.map(p => p.category_for))])
 const types = computed(() => {
@@ -125,15 +139,52 @@ const types = computed(() => {
 })
 
 const filtered = computed(() => {
+  console.log('[Shop] submittedSearch =', searchStore.submittedSearch) // debug
   let list = [...products]
-  if (selectedCat.value !== 'All') list = list.filter(p => p.category_for === selectedCat.value)
-  if (selectedType.value !== 'All') list = list.filter(p => p.type === selectedType.value)
-  if (newInOnly.value) list = list.filter(p => p.isNewIn)
 
-  if (sortBy.value === 'price-asc') list.sort((a, b) => a.price - b.price)
-  else if (sortBy.value === 'price-desc') list.sort((a, b) => b.price - a.price)
-  else if (sortBy.value === 'discount') list.sort((a, b) => b.discount - a.discount)
+  if (searchStore.submittedSearch) {
+    list = list.filter(product =>
+      (product.type ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase()) ||
+      (product.category_for ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase().trim()) ||
+      (product.item ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase()) ||  // also search "Clothing"
+      (product.description ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase())
+    )
+  }
 
+  // CATEGORY
+  if (selectedCat.value !== 'All') {
+
+    list = list.filter(
+      p => p.category_for === selectedCat.value
+    )
+
+  }
+  // TYPE
+  if (selectedType.value !== 'All') {
+
+    list = list.filter(
+      p => p.type === selectedType.value
+    )
+  }
+  // NEW IN
+  if (newInOnly.value) {
+    list = list.filter(
+      p => p.isNewIn
+    )
+  }
+  // SORT
+  if (sortBy.value === 'price-asc') {
+
+    list.sort((a, b) => a.price - b.price)
+
+  }
+  else if (sortBy.value === 'price-desc') {
+    list.sort((a, b) => b.price - a.price)
+  }
+  else if (sortBy.value === 'discount') {
+    list.sort((a, b) => b.discount - a.discount)
+  }
   return list
 })
+
 </script>

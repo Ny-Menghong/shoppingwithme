@@ -19,9 +19,9 @@
 
         <!-- Buttons -->
         <div class="flex gap-4">
-          <button :class="DarkMode.isDark ? 'bg-yellow-950 text-white' : 'bg-gray-950 text-white'" class="px-7 py-3 rounded-full font-semibold hover:scale-105 transition">
+          <router-link to="/shop" :class="DarkMode.isDark ? 'bg-yellow-950 text-white' : 'bg-gray-950 text-white'" class="px-7 py-3 rounded-full font-semibold hover:scale-105 transition">
             Shop Now
-          </button>
+          </router-link>
 
           <button :class="DarkMode.isDark ? 'hover:bg-yellow-950 text-white border-yellow-950' : ' text-black '" class="border border-black px-7 py-3 rounded-full font-semibold hover:bg-black hover:text-white transition">
             Explore

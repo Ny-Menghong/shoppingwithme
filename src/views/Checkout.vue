@@ -1,111 +1,392 @@
 <template>
-  <div :class="DarkMode.isDark ? 'bg-gray-950 text-white min-h-screen' : 'bg-gray-50 text-black min-h-screen'">
+  <div
+    :class="
+      DarkMode.isDark
+        ? 'bg-gray-950 text-white min-h-screen'
+        : 'bg-gray-50 text-black min-h-screen'
+    "
+  >
     <Navbar />
 
     <div class="max-w-5xl mx-auto px-4 py-10">
       <h1 class="text-3xl font-bold mb-8">Checkout</h1>
 
       <div class="grid lg:grid-cols-5 gap-8">
-        <!-- Form -->
+        <!-- FORM -->
         <div class="lg:col-span-3 space-y-6">
-          <!-- Shipping -->
-          <div :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'" class="rounded-2xl p-6 shadow-sm">
-            <h2 class="font-semibold text-lg mb-4">Shipping Information</h2>
+          <!-- SHIPPING -->
+          <div
+            :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'"
+            class="rounded-2xl p-6 shadow-sm"
+          >
+            <h2 class="font-semibold text-lg mb-4">
+              Shipping Information
+            </h2>
+
             <div class="grid grid-cols-2 gap-4">
+              <!-- FIRST NAME -->
               <div>
-                <label class="block text-sm font-medium mb-1">First Name</label>
-                <input type="text" placeholder="John" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  First Name
+                </label>
+
+                <input
+                  v-model="form.firstName"
+                  type="text"
+                  placeholder="John"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.firstName ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.firstName"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.firstName }}
+                </p>
               </div>
+
+              <!-- LAST NAME -->
               <div>
-                <label class="block text-sm font-medium mb-1">Last Name</label>
-                <input type="text" placeholder="Doe" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  Last Name
+                </label>
+
+                <input
+                  v-model="form.lastName"
+                  type="text"
+                  placeholder="Doe"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.lastName ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.lastName"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.lastName }}
+                </p>
               </div>
+
+              <!-- EMAIL -->
               <div class="col-span-2">
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input type="email" placeholder="you@example.com" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  Email
+                </label>
+
+                <input
+                  v-model="form.email"
+                  type="email"
+                  placeholder="you@example.com"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.email ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.email"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.email }}
+                </p>
               </div>
+
+              <!-- ADDRESS -->
               <div class="col-span-2">
-                <label class="block text-sm font-medium mb-1">Address</label>
-                <input type="text" placeholder="123 Main St" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  Address
+                </label>
+
+                <input
+                  v-model="form.address"
+                  type="text"
+                  placeholder="123 Main St"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.address ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.address"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.address }}
+                </p>
               </div>
+
+              <!-- CITY -->
               <div>
-                <label class="block text-sm font-medium mb-1">City</label>
-                <input type="text" placeholder="City" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  City
+                </label>
+
+                <input
+                  v-model="form.city"
+                  type="text"
+                  placeholder="City"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.city ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.city"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.city }}
+                </p>
               </div>
+
+              <!-- ZIP -->
               <div>
-                <label class="block text-sm font-medium mb-1">ZIP Code</label>
-                <input type="text" placeholder="00000" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  ZIP Code
+                </label>
+
+                <input
+                  v-model="form.zip"
+                  type="text"
+                  placeholder="00000"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.zip ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.zip"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.zip }}
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- Payment -->
-          <div :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'" class="rounded-2xl p-6 shadow-sm">
-            <h2 class="font-semibold text-lg mb-4">Payment</h2>
+          <!-- PAYMENT -->
+          <div
+            :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'"
+            class="rounded-2xl p-6 shadow-sm"
+          >
+            <h2 class="font-semibold text-lg mb-4">
+              Payment
+            </h2>
+
             <div class="space-y-4">
+              <!-- CARD NUMBER -->
               <div>
-                <label class="block text-sm font-medium mb-1">Card Number</label>
-                <input type="text" placeholder="4242 4242 4242 4242" maxlength="19" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                  :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                <label class="block text-sm font-medium mb-1">
+                  Card Number
+                </label>
+
+                <input
+                  v-model="form.cardNumber"
+                  type="text"
+                  placeholder="4242 4242 4242 4242"
+                  maxlength="19"
+                  class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                  :class="[
+                    DarkMode.isDark
+                      ? 'bg-gray-700 border-gray-600 text-white'
+                      : 'bg-gray-50 border-gray-200',
+                    errors.cardNumber ? 'border-red-500' : ''
+                  ]"
+                />
+
+                <p
+                  v-if="errors.cardNumber"
+                  class="text-red-500 text-xs mt-1"
+                >
+                  {{ errors.cardNumber }}
+                </p>
               </div>
+
               <div class="grid grid-cols-2 gap-4">
+                <!-- EXPIRY -->
                 <div>
-                  <label class="block text-sm font-medium mb-1">Expiry</label>
-                  <input type="text" placeholder="MM / YY" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                    :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                  <label class="block text-sm font-medium mb-1">
+                    Expiry
+                  </label>
+
+                  <input
+                    v-model="form.expiry"
+                    type="text"
+                    placeholder="MM / YY"
+                    class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                    :class="[
+                      DarkMode.isDark
+                        ? 'bg-gray-700 border-gray-600 text-white'
+                        : 'bg-gray-50 border-gray-200',
+                      errors.expiry ? 'border-red-500' : ''
+                    ]"
+                  />
+
+                  <p
+                    v-if="errors.expiry"
+                    class="text-red-500 text-xs mt-1"
+                  >
+                    {{ errors.expiry }}
+                  </p>
                 </div>
+
+                <!-- CVV -->
                 <div>
-                  <label class="block text-sm font-medium mb-1">CVV</label>
-                  <input type="text" placeholder="123" maxlength="4" class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none focus:border-black transition"
-                    :class="DarkMode.isDark ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-200'" />
+                  <label class="block text-sm font-medium mb-1">
+                    CVV
+                  </label>
+
+                  <input
+                    v-model="form.cvv"
+                    type="text"
+                    placeholder="123"
+                    maxlength="4"
+                    class="w-full border rounded-xl px-4 py-2.5 text-sm outline-none transition"
+                    :class="[
+                      DarkMode.isDark
+                        ? 'bg-gray-700 border-gray-600 text-white'
+                        : 'bg-gray-50 border-gray-200',
+                      errors.cvv ? 'border-red-500' : ''
+                    ]"
+                  />
+
+                  <p
+                    v-if="errors.cvv"
+                    class="text-red-500 text-xs mt-1"
+                  >
+                    {{ errors.cvv }}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Order Review -->
+        <!-- ORDER REVIEW -->
         <div class="lg:col-span-2">
-          <div :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'" class="rounded-2xl p-5 shadow-sm sticky top-24">
-            <h2 class="font-semibold mb-4">Order Review</h2>
+          <div
+            :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'"
+            class="rounded-2xl p-5 shadow-sm sticky top-24"
+          >
+            <h2 class="font-semibold mb-4">
+              Order Review
+            </h2>
+
             <div class="space-y-3 mb-4 max-h-64 overflow-y-auto pr-1">
-              <div v-for="item in cart.items" :key="item.id" class="flex gap-3 items-center">
-                <img :src="item.image[0]" class="w-12 h-14 object-cover rounded-lg flex-shrink-0" />
+              <div
+                v-for="item in cart.items"
+                :key="item.id"
+                class="flex gap-3 items-center"
+              >
+                <img
+                  :src="item.image[0]"
+                  class="w-12 h-14 object-cover rounded-lg flex-shrink-0"
+                />
+
                 <div class="flex-1 min-w-0">
-                  <p class="text-xs font-medium truncate">{{ item.type }}</p>
-                  <p class="text-xs text-gray-400">Qty: {{ item.quantity }}</p>
+                  <p class="text-xs font-medium truncate">
+                    {{ item.type }}
+                  </p>
+
+                  <p class="text-xs text-gray-400">
+                    Qty: {{ item.quantity }}
+                  </p>
                 </div>
-                <span class="text-sm font-semibold">${{ ((item.discount > 0 ? item.price - item.price * item.discount / 100 : item.price) * item.quantity).toFixed(2) }}</span>
+
+                <span class="text-sm font-semibold">
+                  ${{
+                    (
+                      (
+                        item.discount > 0
+                          ? item.price -
+                            (item.price * item.discount) / 100
+                          : item.price
+                      ) * item.quantity
+                    ).toFixed(2)
+                  }}
+                </span>
               </div>
             </div>
-            <div class="border-t pt-4 space-y-2 text-sm" :class="DarkMode.isDark ? 'border-gray-600' : 'border-gray-200'">
-              <div class="flex justify-between"><span class="text-gray-400">Subtotal</span><span>${{ cart.totalPrice.toFixed(2) }}</span></div>
-              <div class="flex justify-between"><span class="text-gray-400">Shipping</span><span class="text-green-500">Free</span></div>
+
+            <div
+              class="border-t pt-4 space-y-2 text-sm"
+              :class="
+                DarkMode.isDark
+                  ? 'border-gray-600'
+                  : 'border-gray-200'
+              "
+            >
+              <div class="flex justify-between">
+                <span class="text-gray-400">Subtotal</span>
+
+                <span>
+                  ${{ cart.totalPrice.toFixed(2) }}
+                </span>
+              </div>
+
+              <div class="flex justify-between">
+                <span class="text-gray-400">Shipping</span>
+
+                <span class="text-green-500">
+                  Free
+                </span>
+              </div>
+
               <div class="flex justify-between font-bold text-base pt-1">
-                <span>Total</span><span>${{ cart.totalPrice.toFixed(2) }}</span>
+                <span>Total</span>
+
+                <span>
+                  ${{ cart.totalPrice.toFixed(2) }}
+                </span>
               </div>
             </div>
-            <button @click="placeOrder" class="w-full mt-5 bg-black text-white py-3.5 rounded-xl font-semibold hover:bg-gray-800 transition">
+
+            <button
+              @click="placeOrder"
+              class="w-full mt-5 bg-black text-white py-3.5 rounded-xl font-semibold hover:bg-gray-800 transition"
+            >
               Place Order
             </button>
           </div>
         </div>
       </div>
     </div>
+
     <Footer />
   </div>
 </template>
 
 <script setup>
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
+
 import { useCart } from '../stores/useCart'
 import { useDarkMode } from '../stores/DarkMode'
 
@@ -113,9 +394,119 @@ const DarkMode = useDarkMode()
 const cart = useCart()
 const router = useRouter()
 
+// FORM
+const form = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  address: '',
+  city: '',
+  zip: '',
+  cardNumber: '',
+  expiry: '',
+  cvv: '',
+})
+
+// ERRORS
+const errors = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  address: '',
+  city: '',
+  zip: '',
+  cardNumber: '',
+  expiry: '',
+  cvv: '',
+})
+
+// VALIDATE
+const validateForm = () => {
+  let isValid = true
+
+  // RESET ERRORS
+  Object.keys(errors).forEach((key) => {
+    errors[key] = ''
+  })
+
+  // FIRST NAME
+  if (!form.firstName.trim()) {
+    errors.firstName = 'First name is required'
+    isValid = false
+  }
+
+  // LAST NAME
+  if (!form.lastName.trim()) {
+    errors.lastName = 'Last name is required'
+    isValid = false
+  }
+
+  // EMAIL
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+  if (!form.email.trim()) {
+    errors.email = 'Email is required'
+    isValid = false
+  } else if (!emailRegex.test(form.email)) {
+    errors.email = 'Invalid email address'
+    isValid = false
+  }
+
+  // ADDRESS
+  if (!form.address.trim()) {
+    errors.address = 'Address is required'
+    isValid = false
+  }
+
+  // CITY
+  if (!form.city.trim()) {
+    errors.city = 'City is required'
+    isValid = false
+  }
+
+  // ZIP
+  if (!form.zip.trim()) {
+    errors.zip = 'ZIP code is required'
+    isValid = false
+  }
+
+  // CARD NUMBER
+  const cardNumber = form.cardNumber.replace(/\s/g, '')
+
+  if (!cardNumber) {
+    errors.cardNumber = 'Card number is required'
+    isValid = false
+  } else if (cardNumber.length < 16) {
+    errors.cardNumber = 'Invalid card number'
+    isValid = false
+  }
+
+  // EXPIRY
+  if (!form.expiry.trim()) {
+    errors.expiry = 'Expiry date is required'
+    isValid = false
+  }
+
+  // CVV
+  if (!form.cvv.trim()) {
+    errors.cvv = 'CVV is required'
+    isValid = false
+  } else if (form.cvv.length < 3) {
+    errors.cvv = 'Invalid CVV'
+    isValid = false
+  }
+
+  return isValid
+}
+
+// PLACE ORDER
 const placeOrder = () => {
+  if (!validateForm()) return
+
   alert('Order placed! Thank you for shopping with us.')
+
   cart.clearCart()
+
   router.push('/')
 }
 </script>

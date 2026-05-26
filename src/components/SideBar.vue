@@ -1,61 +1,79 @@
 <template>
-    <div>
-        <ul class="px-4 space-y-2 mt-4 text-gray-700">
-  <!-- MEN -->
-            <li>
-                <details class="group">
-                <summary class="cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-100 flex justify-between">
-                    Men
-                    <span class="group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <div class="pl-5 space-y-1 mt-1">
-                    <a href="#" class="block py-1 hover:text-blue-600">T-Shirts</a>
-                    <a href="#" class="block py-1 hover:text-blue-600">Shoes</a>
-                    <a href="#" class="block py-1 hover:text-blue-600">Accessories</a>
-                </div>
-                </details>
-            </li>
+  <aside class="w-full">
+    <div :class="DarkMode.isDark ? 'bg-gray-800' : ''" class="p-5 sticky top-24">
+      <h3 class="font-semibold mb-4">Filters</h3>
+      <!-- Category -->
+      <div class="mb-5">
+        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
+          Category
+        </p>
+        <div class="space-y-1">
+          <button
+            v-for="cat in categories"
+            :key="cat"
+            @click="selectedCat = cat"
+            class="block text-lg w-full text-left hover:pe-1.5 px-3 py-1.5 rounded-lg transition"
+            :class="
+              selectedCat === cat
+                ? 'bg-black text-white'
+                : DarkMode.isDark
+                  ? 'hover:bg-gray-700'
+                  : 'hover:bg-gray-100'
+            "
+          >
+            {{ cat }}
+          </button>
+        </div>
+      </div>
 
-            <!-- WOMEN -->
-            <li>
-                <details class="group">
-                <summary class="cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-100 flex justify-between">
-                    Women
-                    <span class="group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <div class="pl-5 space-y-1 mt-1">
-                    <a href="#" class="block py-1 hover:text-pink-500">Dresses</a>
-                    <a href="#" class="block py-1 hover:text-pink-500">Bags</a>
-                    <a href="#" class="block py-1 hover:text-pink-500">Shoes</a>
-                </div>
-                </details>
-            </li>
-
-            <!-- CHILDREN -->
-            <li>
-                <details class="group">
-                <summary class="cursor-pointer py-2 px-3 rounded-lg hover:bg-gray-100 flex justify-between">
-                    Children
-                    <span class="group-open:rotate-180 transition">⌄</span>
-                </summary>
-                <div class="pl-5 space-y-1 mt-1">
-                    <a href="#" class="block py-1 hover:text-green-600">Boys</a>
-                    <a href="#" class="block py-1 hover:text-green-600">Girls</a>
-                </div>
-                </details>
-            </li>
-
-        </ul>
+      <!-- Type -->
+      <div class="mb-5">
+        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Type</p>
+        <div class="space-y-1">
+          <button
+            v-for="t in types"
+            :key="t"
+            @click="selectedType = t"
+            class="block w-full text-left text-sm px-3 py-1.5 rounded-lg transition"
+            :class="
+              selectedType === t
+                ? 'bg-black text-white'
+                : DarkMode.isDark
+                  ? 'hover:bg-gray-700'
+                  : 'hover:bg-gray-100'
+            "
+          >
+            {{ t }}
+          </button>
+        </div>
+      </div>
     </div>
-  
+  </aside>
 </template>
 
-<script>
-export default {
+<script setup>
+import { useSearchStore } from "../stores/SearchStore";
+import { useDarkMode } from "../stores/DarkMode";
+import { computed, ref } from "vue";
+import { products } from "../data/products";
+import { useMenuFilter } from "../stores/MenuFilter";
 
-}
+const selectedType = ref("All");
+const useMenu = useMenuFilter();
+const DarkMode = useDarkMode();
+const selectedCat = ref("All");
+
+const categories = computed(() => [
+  "All",
+  ...new Set(products.map((p) => p.category_for)),
+]);
+const types = computed(() => {
+  const pool =
+    selectedCat.value === "All"
+      ? products
+      : products.filter((p) => p.category_for === selectedCat.value);
+  return ["All", ...new Set(pool.map((p) => p.type))];
+});
 </script>
 
-<style>
-
-</style>
+<style></style>

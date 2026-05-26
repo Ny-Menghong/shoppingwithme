@@ -108,5 +108,6 @@ const handleAdd = () => {
   for (let i = 0; i < qty.value; i++) cart.addItem(product.value)
   added.value = true
   setTimeout(() => added.value = false, 2000)
+  alert('Added to cart!')
 }
 </script>

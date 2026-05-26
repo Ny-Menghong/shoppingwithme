@@ -1,10 +1,10 @@
 <template>
-  <footer class="bg-ink text-cream mt-20">
+  <footer class="bg-ink text-cream">
     <div class="max-w-7xl mx-auto px-6 py-16">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-10 mb-12">
         <!-- Brand -->
-        <div class="md:col-span-1">
-          <h2 class="font-display text-3xl text-gold mb-4">MAISON</h2>
+        <div class="col-span-3 md:col-span-1">
+          <h2 class="font-display text-3xl text-gold mb-4 font-bold">VH-Shop</h2>
           <p class="font-body text-xs text-cream/50 leading-relaxed mb-6">
             Curating the finest pieces from global ateliers. Luxury redefined for the modern connoisseur.
           </p>
@@ -46,7 +46,7 @@
 
       <!-- Bottom -->
       <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-t border-cream/10 pt-6">
-        <p class="text-xs text-cream/30 font-mono">© 2024 MAISON. All rights reserved.</p>
+        <p class="text-xs text-cream/30 font-mono">© 2026 VH-Shop. All rights reserved.</p>
         <div class="flex gap-6">
           <a v-for="item in ['Privacy', 'Terms', 'Cookies']" :key="item" href="#"
             class="text-xs text-cream/30 hover:text-cream/70 transition-colors font-mono">{{ item }}</a>
@@ -83,8 +83,8 @@ const footerLinks = [
   {
     title: 'Account',
     links: [
-      { label: 'Sign In', to: '/auth/login' },
-      { label: 'Register', to: '/auth/register' },
+      { label: 'Sign In', to: '/login' },
+      { label: 'Register', to: '/register' },
       { label: 'My Orders', to: '/profile' },
       { label: 'Wishlist', to: '/wishlist' },
     ]

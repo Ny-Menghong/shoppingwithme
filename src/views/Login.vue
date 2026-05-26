@@ -1,6 +1,8 @@
 <template>
   <div :class="DarkMode.isDark ? 'bg-gray-950 text-white' : 'bg-gray-50 text-black'" class="min-h-screen flex items-center justify-center px-4">
+    
     <div :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'" class="w-full max-w-md rounded-2xl shadow-lg p-8">
+      <router-link to="/" class="text-blue-500 hover:underline mb-xl-4"> <i class="bi bi-arrow-bar-left"></i> Back to Home</router-link>
       <h1 class="text-2xl font-bold mb-1">Welcome back</h1>
       <p class="text-sm text-gray-400 mb-6">Sign in to your account</p>
 

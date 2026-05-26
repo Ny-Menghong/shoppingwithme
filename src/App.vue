@@ -1,17 +1,33 @@
 <template>
   <div >
-    <!-- <Navbar></Navbar>
-    <Banner></Banner> -->
-    <!-- <DropDown></DropDown> -->
-    <router-view></router-view>
-     <!-- <Form></Form> -->
+    <RouterView v-slot="{ Component }">
+
+    <Transition name="page" mode="out-in">
+
+      <component :is="Component" />
+
+    </Transition>
+
+  </RouterView>
   </div>
 </template>
 
 <script setup>
-import Home from './views/Home.vue';
 
 </script>
 <style>
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.4s ease;
+}
 
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-40px);
+}
 </style>
