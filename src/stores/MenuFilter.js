@@ -1,36 +1,18 @@
-// stores/MenuFilter.js
-
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
-export const useMenuFilter = defineStore('menuFilter', () => {
+export const useMenuFilter = defineStore('menuFilter', {
+  state: () => ({
+    category: 'All',
+    type: 'All'
+  }),
 
-  // MENU STATE
-  const menu = ref('All')
-
-  // SUBMITTED MENU
-  const submittedMenu = ref('All')
-
-  // SUBMIT MENU
-  const submitMenu = () => {
-    submittedMenu.value = menu.value
-
-    console.log(
-      '[MenuFilter] submitted:',
-      submittedMenu.value
-    )
-  }
-
-  // CLEAR MENU
-  const clearMenu = () => {
-    menu.value = 'All'
-    submittedMenu.value = 'All'
-  }
-
-  return {
-    menu,
-    submittedMenu,
-    submitMenu,
-    clearMenu
+  actions: {
+    setCategory(cat) {
+      this.category = cat
+      this.type = 'All' // reset type when category changes
+    },
+    setType(type) {
+      this.type = type
+    }
   }
 })

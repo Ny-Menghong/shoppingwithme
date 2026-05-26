@@ -1,5 +1,11 @@
 <template>
-  <div :class="DarkMode.isDark ? 'bg-gray-950 text-white min-h-screen' : 'bg-gray-50 text-black min-h-screen'">
+  <div
+    :class="
+      DarkMode.isDark
+        ? 'bg-gray-950 text-white min-h-screen'
+        : 'bg-gray-50 text-black min-h-screen'
+    "
+  >
     <Navbar />
 
     <div class="max-w-7xl mx-auto px-4 py-10">
@@ -12,21 +18,30 @@
       <div class="flex gap-6">
         <!-- Filters Sidebar -->
         <aside class="hidden lg:block w-56 flex-shrink-0">
-          <div :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'" class="rounded-2xl p-5 sticky top-24 shadow-sm">
+          <div
+            :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'"
+            class="rounded-2xl p-5 sticky top-24 shadow-sm"
+          >
             <h3 class="font-semibold mb-4">Filters</h3>
 
             <!-- Category -->
             <div class="mb-5">
-              <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Category</p>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
+                Category
+              </p>
               <div class="space-y-1">
                 <button
                   v-for="cat in categories"
                   :key="cat"
                   @click="selectedCat = cat"
                   class="block w-full text-left text-sm px-3 py-1.5 rounded-lg transition"
-                  :class="selectedCat === cat
-                    ? 'bg-black text-white'
-                    : DarkMode.isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'"
+                  :class="
+                    selectedCat === cat
+                      ? 'bg-black text-white'
+                      : DarkMode.isDark
+                        ? 'hover:bg-gray-700'
+                        : 'hover:bg-gray-100'
+                  "
                 >
                   {{ cat }}
                 </button>
@@ -35,16 +50,22 @@
 
             <!-- Type -->
             <div class="mb-5">
-              <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Type</p>
+              <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
+                Type
+              </p>
               <div class="space-y-1">
                 <button
                   v-for="t in types"
                   :key="t"
                   @click="selectedType = t"
                   class="block w-full text-left text-sm px-3 py-1.5 rounded-lg transition"
-                  :class="selectedType === t
-                    ? 'bg-black text-white'
-                    : DarkMode.isDark ? 'hover:bg-gray-700' : 'hover:bg-gray-100'"
+                  :class="
+                    selectedType === t
+                      ? 'bg-black text-white'
+                      : DarkMode.isDark
+                        ? 'hover:bg-gray-700'
+                        : 'hover:bg-gray-100'
+                  "
                 >
                   {{ t }}
                 </button>
@@ -65,7 +86,11 @@
           <div class="flex items-center justify-between mb-5 gap-3">
             <select
               v-model="sortBy"
-              :class="DarkMode.isDark ? 'bg-gray-800 text-white border-gray-600' : 'bg-white border-gray-200'"
+              :class="
+                DarkMode.isDark
+                  ? 'bg-gray-800 text-white border-gray-600'
+                  : 'bg-white border-gray-200'
+              "
               class="border text-sm px-3 py-2 rounded-lg outline-none"
             >
               <option value="default">Sort: Default</option>
@@ -81,7 +106,11 @@
                 :key="cat"
                 @click="selectedCat = selectedCat === cat ? 'All' : cat"
                 class="text-xs px-3 py-1.5 rounded-full border transition"
-                :class="selectedCat === cat ? 'bg-black text-white border-black' : 'border-gray-300'"
+                :class="
+                  selectedCat === cat
+                    ? 'bg-black text-white border-black'
+                    : 'border-gray-300'
+                "
               >
                 {{ cat }}
               </button>
@@ -89,8 +118,15 @@
           </div>
 
           <!-- Grid -->
-          <div v-if="filtered.length" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-4 gap-4">
-            <ProductCard v-for="p in filtered" :key="p.id + p.type" :product="p" />
+          <div
+            v-if="filtered.length"
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 xl:grid-cols-4 gap-4"
+          >
+            <ProductCard
+              v-for="p in filtered"
+              :key="p.id + p.type"
+              :product="p"
+            />
           </div>
           <div v-else class="text-center py-24 text-gray-400">
             <i class="bi bi-box-seam text-5xl mb-4 block"></i>
@@ -105,86 +141,89 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
-import ProductCard from '../components/ProductCard.vue'
-import { products } from '../data/products'
-import { useDarkMode } from '../stores/DarkMode'
-import { useSearchStore } from '../stores/SearchStore'
-import { onUnmounted } from 'vue'
-import { useMenuFilter } from '../stores/MenuFilter';
+import { ref, computed } from "vue";
+import Navbar from "../components/Navbar.vue";
+import Footer from "../components/Footer.vue";
+import ProductCard from "../components/ProductCard.vue";
+import { products } from "../data/products";
+import { useDarkMode } from "../stores/DarkMode";
+import { useSearchStore } from "../stores/SearchStore";
+import { useMenuFilter } from "../stores/MenuFilter";
 
-const useMenu = useMenuFilter();
+const DarkMode = useDarkMode();
 const searchStore = useSearchStore();
-const DarkMode = useDarkMode()
-const selectedCat = ref(computed({
-  get() {
-    return useMenu.menu
-  },
+const menu = useMenuFilter();
 
-  set(value) {
-    useMenu.menu = value
-  }
-}))
-const selectedType = ref('All')
-const sortBy = ref('default')
-const newInOnly = ref(false)
+const sortBy = ref("default");
+const newInOnly = ref(false);
 
+// ✅ GLOBAL FILTER STATE (PINIA)
+const selectedCat = computed({
+  get: () => menu.category,
+  set: (val) => menu.setCategory(val),
+});
 
-const categories = computed(() => ['All', ...new Set(products.map(p => p.category_for))])
+const selectedType = computed({
+  get: () => menu.type,
+  set: (val) => menu.setType(val),
+});
+
+// Categories
+const categories = computed(() => [
+  "All",
+  ...new Set(products.map((p) => p.category_for)),
+]);
+
+// Types
 const types = computed(() => {
-  const pool = selectedCat.value === 'All' ? products : products.filter(p => p.category_for === selectedCat.value)
-  return ['All', ...new Set(pool.map(p => p.type))]
-})
+  const pool =
+    selectedCat.value === "All"
+      ? products
+      : products.filter((p) => p.category_for === selectedCat.value);
 
+  return ["All", ...new Set(pool.map((p) => p.type))];
+});
+
+// FILTER LOGIC
 const filtered = computed(() => {
-  console.log('[Shop] submittedSearch =', searchStore.submittedSearch) // debug
-  let list = [...products]
+  let list = [...products];
 
-  if (searchStore.submittedSearch) {
-    list = list.filter(product =>
-      (product.type ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase()) ||
-      (product.category_for ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase().trim()) ||
-      (product.item ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase()) ||  // also search "Clothing"
-      (product.description ?? '').toLowerCase().includes(searchStore.submittedSearch.toLowerCase())
-    )
+  // SEARCH
+  const search = searchStore.submittedSearch?.toLowerCase().trim();
+  if (search) {
+    list = list.filter(
+      (p) =>
+        (p.type ?? "").toLowerCase().includes(search) ||
+        (p.category_for ?? "").toLowerCase().includes(search) ||
+        (p.item ?? "").toLowerCase().includes(search) ||
+        (p.description ?? "").toLowerCase().includes(search),
+    );
   }
 
   // CATEGORY
-  if (selectedCat.value !== 'All') {
-
-    list = list.filter(
-      p => p.category_for === selectedCat.value
-    )
-
+  if (selectedCat.value !== "All") {
+    list = list.filter((p) => p.category_for === selectedCat.value);
   }
+
   // TYPE
-  if (selectedType.value !== 'All') {
-
-    list = list.filter(
-      p => p.type === selectedType.value
-    )
+  if (selectedType.value !== "All") {
+    list = list.filter((p) => p.type === selectedType.value);
   }
+
   // NEW IN
   if (newInOnly.value) {
-    list = list.filter(
-      p => p.isNewIn
-    )
+    list = list.filter((p) => p.isNewIn);
   }
+
   // SORT
-  if (sortBy.value === 'price-asc') {
-
-    list.sort((a, b) => a.price - b.price)
-
+  if (sortBy.value === "price-asc") {
+    list.sort((a, b) => a.price - b.price);
+  } else if (sortBy.value === "price-desc") {
+    list.sort((a, b) => b.price - a.price);
+  } else if (sortBy.value === "discount") {
+    list.sort((a, b) => b.discount - a.discount);
   }
-  else if (sortBy.value === 'price-desc') {
-    list.sort((a, b) => b.price - a.price)
-  }
-  else if (sortBy.value === 'discount') {
-    list.sort((a, b) => b.discount - a.discount)
-  }
-  return list
-})
 
+  return list;
+});
 </script>

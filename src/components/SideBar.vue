@@ -2,11 +2,13 @@
   <aside class="w-full">
     <div :class="DarkMode.isDark ? 'bg-gray-800' : ''" class="p-5 sticky top-24">
       <h3 class="font-semibold mb-4">Filters</h3>
+
       <!-- Category -->
       <div class="mb-5">
         <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
           Category
         </p>
+
         <div class="space-y-1">
           <button
             v-for="cat in categories"
@@ -28,7 +30,10 @@
 
       <!-- Type -->
       <div class="mb-5">
-        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">Type</p>
+        <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
+          Type
+        </p>
+
         <div class="space-y-1">
           <button
             v-for="t in types"
@@ -52,28 +57,39 @@
 </template>
 
 <script setup>
-import { useSearchStore } from "../stores/SearchStore";
-import { useDarkMode } from "../stores/DarkMode";
-import { computed, ref } from "vue";
-import { products } from "../data/products";
-import { useMenuFilter } from "../stores/MenuFilter";
+import { computed } from "vue"
+import { useDarkMode } from "../stores/DarkMode"
+import { useMenuFilter } from "../stores/MenuFilter"
+import { products } from "../data/products"
 
-const selectedType = ref("All");
-const useMenu = useMenuFilter();
-const DarkMode = useDarkMode();
-const selectedCat = ref("All");
+const DarkMode = useDarkMode()
+const menu = useMenuFilter()
 
+const selectedCat = computed({
+  get: () => menu.category,
+  set: (val) => menu.setCategory(val)
+})
+
+const selectedType = computed({
+  get: () => menu.type,
+  set: (val) => menu.setType(val)
+})
+
+// Categories list
 const categories = computed(() => [
   "All",
-  ...new Set(products.map((p) => p.category_for)),
-]);
+  ...new Set(products.map((p) => p.category_for))
+])
+
+// Types list (depends on selected category)
 const types = computed(() => {
   const pool =
     selectedCat.value === "All"
       ? products
-      : products.filter((p) => p.category_for === selectedCat.value);
-  return ["All", ...new Set(pool.map((p) => p.type))];
-});
+      : products.filter((p) => p.category_for === selectedCat.value)
+
+  return ["All", ...new Set(pool.map((p) => p.type))]
+})
 </script>
 
 <style></style>

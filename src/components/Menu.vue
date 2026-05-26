@@ -18,20 +18,26 @@
 </template>
 
 <script setup>
-import { useMenuFilter } from '../stores/MenuFilter';
-import { useRouter } from 'vue-router';
-import { computed } from 'vue';
-import { products } from '../data/products';
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useMenuFilter } from '../stores/MenuFilter'
+import { products } from '../data/products'
 
-const useMenu = useMenuFilter();
-const router = useRouter();
+const menu = useMenuFilter()
+const router = useRouter()
 
-const categories = computed(() => ['All', ...new Set(products.map(p => p.category_for))])
+// categories list
+const categories = computed(() => [
+  'All',
+  ...new Set(products.map(p => p.category_for))
+])
 
+// set category + navigate
 const setCategory = (cat) => {
-  // បោះ data ទៅ state
-  useMenu.menu = cat;
-  router.push("/shop");
-  console.log(useMenu.menu)
+  menu.setCategory(cat)  
+
+  router.push('/shop')
+
+  console.log('Selected category:', menu.category)
 }
 </script>
