@@ -1,6 +1,5 @@
 <template>
   <div :class="DarkMode.isDark ? 'bg-gray-950 text-white' : 'bg-gray-50 text-black'" class="transition-all duration-500">
-    <Navbar />
     <Banner />
 
     <!-- Featured Products -->
@@ -15,9 +14,13 @@
         </RouterLink>
       </div>
 
+
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         <ProductCard v-for="p in newArrivals" :key="p.id + p.type" :product="p" />
       </div>
+      
+      <Gucci/>
+      
     </section>
 
     <!-- Categories Banner -->
@@ -41,19 +44,18 @@
       </div>
     </section>
 
-    <Footer />
+
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import Navbar from '../components/Navbar.vue'
 import Banner from '../components/Banner.vue'
-import Footer from '../components/Footer.vue'
 import ProductCard from '../components/ProductCard.vue'
 import { products } from '../data/products'
 import { useDarkMode } from '../stores/DarkMode'
+import Gucci from '../components/Gucci.vue'
 
 const DarkMode = useDarkMode()
 const newArrivals = computed(() => products.filter(p => p.isNewIn).slice(0, 8))

@@ -6,6 +6,8 @@ import ProductDetail from '../views/ProductDetail.vue'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Checkout from '../views/Checkout.vue'
+import Profile from '../views/Profile.vue'
+import About from '../views/About.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -15,6 +17,8 @@ const routes = [
   { path: '/login', component: Login },
   { path: '/register', component: Register },
   { path: '/checkout', component: Checkout },
+  { path: '/profile', component: Profile },
+  { path: '/about', component: About },
 ]
 
 const router = createRouter({

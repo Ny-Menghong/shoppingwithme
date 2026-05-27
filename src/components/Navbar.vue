@@ -45,27 +45,31 @@
         <button @click="t.toggleTheme()" class="hover:text-gray-400 text-2xl">
           <i class="bi bi-moon"></i>
         </button>
-
-        <!-- LOGIN -->
-        <RouterLink
-          to="/login"
-          class="hidden md:block border px-3 py-1 rounded-lg hover:bg-gray-300 hover:text-white transition"
-        >
-          LOGIN
-        </RouterLink>
-
-        <!-- REGISTER -->
-        <RouterLink
-          to="/register"
-          class="hidden md:block border px-3 py-1 rounded-lg hover:bg-gray-300 hover:text-white transition"
-        >
-          REGISTER
-        </RouterLink>
-
-        <!-- MOBILE USER ICON -->
-        <router-link to="/login" class="text-black md:hidden text-2xl">
+        <div v-if="!auth.isLogin" class="hidden md:flex gap-2">
+          <!-- LOGIN -->
+          <RouterLink
+            to="/login"
+            class="border px-3 py-1 rounded-lg hover:bg-gray-300 hover:text-white transition"
+          >
+            LOGIN
+          </RouterLink>
+  
+          <!-- REGISTER -->
+          <RouterLink
+            to="/register"
+            class="border px-3 py-1 rounded-lg hover:bg-gray-300 hover:text-white transition"
+          >
+            REGISTER
+          </RouterLink>
+        </div>
+        <div  v-else @click="router.push('/profile')" class="pr-4 hidden md:block">
           <i class="bi bi-person-fill"></i>
-        </router-link>
+          {{ auth.userInfo.name }}
+        </div>
+        <!-- MOBILE USER ICON -->
+        <div @click="auth.isLogin?router.push('/profile'):router.push('/register')" class="text-black md:hidden text-2xl">
+          <i class="bi bi-person-fill"></i>
+        </div>
       </div>
     </div>
 
@@ -233,10 +237,11 @@ import { RouterLink } from "vue-router";
 import { useRouter } from "vue-router";
 import { useDarkMode } from "../stores/DarkMode";
 import { useCart } from "../stores/useCart";
+import { useAuth } from "../stores/auth.js";
 import { useSearchStore } from "../stores/SearchStore";
 import Sidebar from "./SideBar.vue";
 import Menu from "./Menu.vue";
-
+const auth = useAuth()
 const searchStore = useSearchStore();
 const openCart = ref(false);
 const DarkMode = useDarkMode();

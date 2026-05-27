@@ -1,11 +1,8 @@
 <template>
-  <nav class="  px-8 py-4">
-    
+  <nav class="px-8 py-4">
     <div class="flex space-x-10">
-
-      <!-- MAIN MENU --><div v-for="cat in categories" :key="cat" class="relative group">
-      
-
+      <!-- MAIN MENU -->
+      <div v-for="cat in categories" :key="cat" class="relative group">
         <!-- Menu Button -->
         <button class="relative text-lg font-medium pb-1" @click="setCategory(cat)">
           {{ cat }}
@@ -16,7 +13,6 @@
     </div>
   </nav>
 </template>
-
 <script setup>
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
@@ -35,9 +31,7 @@ const categories = computed(() => [
 // set category + navigate
 const setCategory = (cat) => {
   menu.setCategory(cat)  
-
   router.push('/shop')
-
   console.log('Selected category:', menu.category)
 }
 </script>

@@ -23,7 +23,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/cache/catalog/products/2026-05/4122601572/10S26SHS014_Chocolate%20(1)-cr-450x672.jpg",
       "https://zandokh.com/image/cache/catalog/products/2026-05/4122601572/10S26SHS014_Chocolate%20(2)-cr-450x672.jpg"
@@ -52,7 +52,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/3222602693/AV8A0014.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/3222602693/AV8A0010.jpg",
@@ -68,7 +68,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/22226022181/STU_1343.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/22226022181/STU_1337.jpg",
@@ -85,7 +85,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/3222604723/PTAK0070.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/3222604723/PTAK0065.jpg",
@@ -101,7 +101,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Blazers & Jackets",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/5232508036/STU_2622.jpg",
       "https://zandokh.com/image/catalog/products/5232508036/STU_2619.jpg",
@@ -117,7 +117,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/22226022036/AV8A0001.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/22226022036/AV8A9996.jpg",
@@ -169,7 +169,7 @@ export const products = [
     category_for : "Men",
     item : "Accessories",
     type : "Cap",
-    isNewIn:false,
+    isNewIn:true,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/4122601540/10S26CAP006_Black%20(1).jpg",
       "https://zandokh.com/image/catalog/products/2026-05/4122601540/10S26CAP006_Black%20(6).jpg",
@@ -185,7 +185,7 @@ export const products = [
     category_for : "Women",
     item : "Accessories",
     type : "Cap",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2025-10/2522508899/ZD__0045.jpg",
       "https://zandokh.com/image/catalog/products/2025-10/2522508899/ZD__0044.jpg",
@@ -200,7 +200,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:false,
+    isNewIn:true,
     image :[
       "https://zandokh.com/image/catalog/products/2026-17/22226011946/STU_1133.jpg",
       "https://zandokh.com/image/catalog/products/2026-17/22226011946/STU_1126.jpg",
@@ -301,7 +301,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12226012601/PTAK0218.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12226012601/PTAK0213.jpg",
@@ -318,7 +318,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12226022705/STU_6930.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12226022705/STU_6929.jpg",
@@ -336,7 +336,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12225122518/STU_7043%20copy.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12225122518/STU_7042.jpg",
@@ -352,7 +352,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12226022682/STU_5860.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12226022682/STU_5859.jpg",
@@ -368,7 +368,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/22226022432/STU_3988.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/22226022432/STU_3985.jpg",
@@ -384,7 +384,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/12226012608/STU_3285.jpg",
       "https://zandokh.com/image/catalog/products/12226012608/STU_3292.jpg",
@@ -400,7 +400,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/22225121893/STU_3780.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/22225121893/STU_3774.jpg",
@@ -417,7 +417,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12226022711/STU_3273.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12226022711/STU_3278.jpg",
@@ -453,7 +453,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Dresses",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/12226022703/STU_3454.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/12226022703/STU_3452.jpg",
@@ -490,7 +490,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:false,
+    isNewIn:true,
     image :[
       "https://zandokh.com/image/catalog/products/2026-17/21226021712/PTAK0200.jpg",
       "https://zandokh.com/image/catalog/products/2026-17/21226021712/PTAK0196.jpg",
@@ -507,7 +507,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/2112603877/PTAK0054.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/2112603877/PTAK0052.jpg",
@@ -545,7 +545,7 @@ export const products = [
     category_for : "Men",
     item : "Accessories",
     type : "Bags",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2025-09/5582503045/ZD__0877.jpg",
       "https://zandokh.com/image/catalog/products/2025-09/5582503045/ZD__0880.jpg",
@@ -580,7 +580,7 @@ export const products = [
     category_for : "Men",
     item : "Shoes",
     type : "Sandals",
-    isNewIn:false,
+    isNewIn:true,
     image :[
       "https://zandokh.com/image/catalog/products/2026-02/4122508353/10S26SAN001%20-%20INDIGO%20(2).jpg",
       "https://zandokh.com/image/catalog/products/2026-02/4122508353/10S26SAN001%20-%20INDIGO%20(1).jpg",
@@ -595,7 +595,7 @@ export const products = [
     category_for : "Men",
     item : "Shoes",
     type : "Sandals",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-01/5252508061/TAKK5305.jpg",
       "https://zandokh.com/image/catalog/products/2026-01/5252508061/TAKK5308.jpg",
@@ -612,7 +612,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/21226021892/PTAK0182.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/21226021892/PTAK0180.jpg",
@@ -629,7 +629,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/11226011746/STU_2641.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/11226011746/STU_2638.jpg",
@@ -647,7 +647,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-17/2112602860/PTAK0099.jpg",
       "https://zandokh.com/image/catalog/products/2026-17/2112602860/PTAK0094.jpg",
@@ -664,7 +664,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-03/2112602876/PTAK5691.jpg",
       "https://zandokh.com/image/catalog/products/2026-03/2112602876/PTAK5687.jpg",
@@ -681,7 +681,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/21226021840/AV8A9967.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/21226021840/AV8A9964.jpg",
@@ -697,7 +697,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/21226011594/AV8A9956.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/21226011594/AV8A9952.jpg",
@@ -714,7 +714,7 @@ export const products = [
     category_for : "Men",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/3122602007/AV8A0117.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/3122602007/AV8A0115.jpg",
@@ -756,23 +756,6 @@ export const products = [
       "https://zandokh.com/image/catalog/products/2026-05/3112602038/ZD_L0016.jpg"
     ],
     price:18,
-    discount:0,
-    discription :"Oversized Mid-Length Women's Crew Neck GOODLIFE Embroidered T-ShirtOversized Mid-Length Women's Crew Neck GOODLIFE Embroidered T-Shirt Yellow Casual Short Sleeve Knitted Fabric Animal,Graphic,Letter,Slogan Non-Stretch Women Clothing, size features are:Bust: ,Length: ,Sleeve"
-  },
-  {
-    id: 46,
-    category_for : "Men",
-    item : "Clothing",
-    type : "T-Shirts",
-    isNewIn:false,
-    image :[
-      "https://zandokh.com/image/catalog/products/2026-05/3112602031/AV8A9954.jpg",
-      "https://zandokh.com/image/catalog/products/2026-05/3112602031/AV8A9951.jpg",
-      "https://zandokh.com/image/catalog/products/2026-05/3112602031/AV8A9959.jpg",
-      "https://zandokh.com/image/catalog/products/2026-05/3112602031/AV8A9952.jpg",
-      "https://zandokh.com/image/catalog/products/2026-05/3112602031/AV8A9950.jpg"
-    ],
-    price:8,
     discount:0,
     discription :"Oversized Mid-Length Women's Crew Neck GOODLIFE Embroidered T-ShirtOversized Mid-Length Women's Crew Neck GOODLIFE Embroidered T-Shirt Yellow Casual Short Sleeve Knitted Fabric Animal,Graphic,Letter,Slogan Non-Stretch Women Clothing, size features are:Bust: ,Length: ,Sleeve"
   },
@@ -2570,7 +2553,7 @@ export const products = [
     category_for : "Women",
     item : "Clothing",
     type : "Skirt",
-    isNewIn:true,
+    isNewIn:false,
     image :[
       "https://zandokh.com/image/catalog/products/2026-05/3222509625/STU_9342.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/3222509625/STU_9341.jpg",
@@ -2798,7 +2781,7 @@ export const products = [
     category_for : "Kids",
     item : "Accessories",
     type : "Shoes",
-    isNewIn:false,
+    isNewIn:true,
     image: [
       "https://zandokh.com/image/catalog/products/2026-04/53112511016/AV8A9752.jpg",
       "https://zandokh.com/image/catalog/products/2026-04/53112511016/AV8A9756.jpg",
@@ -2906,7 +2889,7 @@ export const products = [
     category_for : "Kids",
     item : "Clothing",
     type : "T-Shirts",
-    isNewIn:false,
+    isNewIn:true,
     image: [
       "https://zandokh.com/image/catalog/products/2026-05/5312511041%20WH/1.jpg",
       "https://zandokh.com/image/catalog/products/2026-05/5312511041%20WH/2.jpg",

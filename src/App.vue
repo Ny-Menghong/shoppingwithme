@@ -1,20 +1,21 @@
 <template>
-  <div >
+  <div>
+    <Navbar />
+
     <RouterView v-slot="{ Component }">
-
-    <Transition name="page" mode="out-in">
-
-      <component :is="Component" />
-
-    </Transition>
-
-  </RouterView>
+      <Transition name="page" mode="out-in">
+        <component :is="Component" />
+      </Transition>
+    </RouterView>
   </div>
+    <Footer />
 </template>
 
 <script setup>
-
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue';
 </script>
+
 <style>
 .page-enter-active,
 .page-leave-active {

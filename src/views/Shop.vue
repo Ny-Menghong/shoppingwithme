@@ -6,7 +6,6 @@
         : 'bg-gray-50 text-black min-h-screen'
     "
   >
-    <Navbar />
 
     <div class="max-w-7xl mx-auto px-4 py-10">
       <!-- Header -->
@@ -135,15 +134,11 @@
         </div>
       </div>
     </div>
-
-    <Footer />
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
-import Navbar from "../components/Navbar.vue";
-import Footer from "../components/Footer.vue";
 import ProductCard from "../components/ProductCard.vue";
 import { products } from "../data/products";
 import { useDarkMode } from "../stores/DarkMode";

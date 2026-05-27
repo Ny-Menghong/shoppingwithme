@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-ink text-cream">
+  <footer :class="darkMode.isDark ? 'bg-gray-800 text-white border-b': 'bg-gray-100 text-black'" class="bg-ink text-cream">
     <div class="max-w-7xl mx-auto px-6 py-16">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-10 mb-12">
         <!-- Brand -->
@@ -58,7 +58,8 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-
+import { useDarkMode } from '../stores/DarkMode';
+const darkMode = useDarkMode();
 const socials = ['Instagram', 'Pinterest', 'Twitter']
 
 const footerLinks = [

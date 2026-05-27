@@ -6,14 +6,16 @@
         : 'bg-gray-50 text-black min-h-screen'
     "
   >
-    <Navbar />
 
     <div class="max-w-5xl mx-auto px-4 py-10">
-      <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+      <h1 class="text-3xl font-bold mb-8">
+        Checkout
+      </h1>
 
       <div class="grid lg:grid-cols-5 gap-8">
         <!-- FORM -->
         <div class="lg:col-span-3 space-y-6">
+
           <!-- SHIPPING -->
           <div
             :class="DarkMode.isDark ? 'bg-gray-800' : 'bg-white'"
@@ -24,6 +26,7 @@
             </h2>
 
             <div class="grid grid-cols-2 gap-4">
+
               <!-- FIRST NAME -->
               <div>
                 <label class="block text-sm font-medium mb-1">
@@ -198,7 +201,8 @@
             </h2>
 
             <div class="space-y-4">
-              <!-- CARD NUMBER -->
+
+              <!-- CARD -->
               <div>
                 <label class="block text-sm font-medium mb-1">
                   Card Number
@@ -227,6 +231,7 @@
               </div>
 
               <div class="grid grid-cols-2 gap-4">
+
                 <!-- EXPIRY -->
                 <div>
                   <label class="block text-sm font-medium mb-1">
@@ -341,7 +346,9 @@
               "
             >
               <div class="flex justify-between">
-                <span class="text-gray-400">Subtotal</span>
+                <span class="text-gray-400">
+                  Subtotal
+                </span>
 
                 <span>
                   ${{ cart.totalPrice.toFixed(2) }}
@@ -349,7 +356,9 @@
               </div>
 
               <div class="flex justify-between">
-                <span class="text-gray-400">Shipping</span>
+                <span class="text-gray-400">
+                  Shipping
+                </span>
 
                 <span class="text-green-500">
                   Free
@@ -365,9 +374,10 @@
               </div>
             </div>
 
+            <!-- BUTTON -->
             <button
               @click="placeOrder"
-              class="w-full mt-5 bg-black text-white py-3.5 rounded-xl font-semibold hover:bg-gray-800 transition"
+              class="w-full mt-5 bg-black text-white py-3.5 rounded-xl font-semibold hover:bg-gray-900 hover:scale-[1.02] active:scale-95 transition duration-300 shadow-lg"
             >
               Place Order
             </button>
@@ -383,6 +393,7 @@
 <script setup>
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import { useToast } from 'vue-toastification'
 
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
@@ -393,6 +404,7 @@ import { useDarkMode } from '../stores/DarkMode'
 const DarkMode = useDarkMode()
 const cart = useCart()
 const router = useRouter()
+const toast = useToast()
 
 // FORM
 const form = reactive({
@@ -424,24 +436,20 @@ const errors = reactive({
 const validateForm = () => {
   let isValid = true
 
-  // RESET ERRORS
   Object.keys(errors).forEach((key) => {
     errors[key] = ''
   })
 
-  // FIRST NAME
   if (!form.firstName.trim()) {
     errors.firstName = 'First name is required'
     isValid = false
   }
 
-  // LAST NAME
   if (!form.lastName.trim()) {
     errors.lastName = 'Last name is required'
     isValid = false
   }
 
-  // EMAIL
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
   if (!form.email.trim()) {
@@ -452,25 +460,21 @@ const validateForm = () => {
     isValid = false
   }
 
-  // ADDRESS
   if (!form.address.trim()) {
     errors.address = 'Address is required'
     isValid = false
   }
 
-  // CITY
   if (!form.city.trim()) {
     errors.city = 'City is required'
     isValid = false
   }
 
-  // ZIP
   if (!form.zip.trim()) {
     errors.zip = 'ZIP code is required'
     isValid = false
   }
 
-  // CARD NUMBER
   const cardNumber = form.cardNumber.replace(/\s/g, '')
 
   if (!cardNumber) {
@@ -481,13 +485,11 @@ const validateForm = () => {
     isValid = false
   }
 
-  // EXPIRY
   if (!form.expiry.trim()) {
     errors.expiry = 'Expiry date is required'
     isValid = false
   }
 
-  // CVV
   if (!form.cvv.trim()) {
     errors.cvv = 'CVV is required'
     isValid = false
@@ -503,10 +505,27 @@ const validateForm = () => {
 const placeOrder = () => {
   if (!validateForm()) return
 
-  alert('Order placed! Thank you for shopping with us.')
+  toast.success(
+    `✨ Congratulations ${form.firstName}! Your order has been placed successfully.`,
+    {
+      timeout: 4000,
+      position: 'top-center',
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      icon: '🛍️'
+    }
+  )
 
   cart.clearCart()
 
-  router.push('/')
+  // RESET FORM
+  Object.keys(form).forEach((key) => {
+    form[key] = ''
+  })
+
+  setTimeout(() => {
+    router.push('/')
+  }, 2000)
 }
 </script>
