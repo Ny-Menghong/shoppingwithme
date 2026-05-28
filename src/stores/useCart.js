@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import { sendTelegram } from "../services/telegram"
 export const useCart = defineStore('cart', {
   state: () => ({
     items: [],

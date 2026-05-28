@@ -1,83 +1,93 @@
-// stores/auth.js
-
 import { defineStore } from "pinia"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
-import { useToast } from 'vue-toastification'
+import { useToast } from "vue-toastification"
+import { sendTelegram } from "../services/telegram"
 export const useAuth = defineStore("auth", () => {
 
-    const toast = useToast();
-    const router = useRouter();
+  const toast = useToast()
+  const router = useRouter()
+
   // LOGIN STATUS
-  const isLogin = ref(
-    localStorage.getItem("status") === "true"
-  )
+  const isLogin = ref(localStorage.getItem("status") === "true")
+
   // USER INFO
   const userInfo = ref({
-    name: localStorage.getItem("name") || "Guse User",
-    email: localStorage.getItem("email") || "guse@gmail.com",
-    password: localStorage.getItem("password") || "vbbvo",
+    name: localStorage.getItem("name") || "",
+    email: localStorage.getItem("email") || "",
+    password: localStorage.getItem("password") || "",
   })
+
   // REGISTER
-  const register = (name, email, password) => {
-    // UPDATE STATE
-    userInfo.value = {name,email,password}
-    // SAVE LOCAL STORAGE
+  const register = async (name, email, password) => {
+    userInfo.value = { name, email, password }
+
     localStorage.setItem("name", name)
     localStorage.setItem("email", email)
     localStorage.setItem("password", password)
-    router.push('/login')
-      // Success Toast
-    toast.success('Register Successfully', {
-    timeout: 2000,
-    position: 'bottom-right',
-    pauseOnHover: true,
-    closeOnClick: true,
-    draggable: true
-  })
-    
+
+    router.push("/login")
+
+    // Toast
+    toast.success(`Welcome ${name} 🎉 Register Successfully`, {
+      timeout: 2000,
+      position: "bottom-right",
+    })
+
+    // Telegram Notification
+    await sendTelegram(
+      `🆕 <b>New User Register</b>\n👤 Name: ${name}\n📧 Email: ${email}`
+    )
   }
+
   // LOGIN
-  const login = (email, password) => {
-    // CHECK EMAIL
+  const login = async (email, password) => {
     if (email !== userInfo.value.email) {
-      alert("Wrong email")
+      toast.error("Wrong email")
       return
     }
-    // CHECK PASSWORD
+
     if (password !== userInfo.value.password) {
-      alert("Wrong password")
+      toast.error("Wrong password")
       return
     }
-    // LOGIN SUCCESS
+
     isLogin.value = true
     localStorage.setItem("status", "true")
-    router.push('/')
-      // Success Toast
-    toast.success('Login Successfully . Enjoy your shoping.', {
-    timeout: 2000,
-    position: 'bottom-right',
-    pauseOnHover: true,
-    closeOnClick: true,
-    draggable: true
-  })
-    
+
+    router.push("/")
+
+    // Toast
+    toast.success(`Hi ${userInfo.value.name} 👋 Login Successfully`, {
+      timeout: 2000,
+      position: "bottom-right",
+    })
+
+    // Telegram Notification
+    await sendTelegram(
+      `🔐 <b>User Login</b>\n👤 Name: ${userInfo.value.name}\n📧 Email: ${email}`
+    )
   }
 
   // LOGOUT
-  const logout = () => {
+  const logout = async () => {
     isLogin.value = false
     localStorage.removeItem("status")
 
-    router.push('/')
-    toast.success('Logout Successfully .', {
-        timeout: 2000,
-        position: 'bottom-right',
-        pauseOnHover: true,
-        closeOnClick: true,
-        draggable: true
+    router.push("/")
+
+    // Toast
+    toast.info(`See you again ${userInfo.value.name} 👋`, {
+      timeout: 2000,
+      position: "bottom-right",
     })
+
+    // Telegram Notification
+    await sendTelegram(
+      `🚪 <b>User Logout</b>\n👤 Name: ${userInfo.value.name}`
+    )
   }
+
   return {
     isLogin,
     userInfo,

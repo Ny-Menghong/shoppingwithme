@@ -400,6 +400,7 @@ import Footer from '../components/Footer.vue'
 
 import { useCart } from '../stores/useCart'
 import { useDarkMode } from '../stores/DarkMode'
+import { sendTelegram } from '../services/telegram.js'
 
 const DarkMode = useDarkMode()
 const cart = useCart()
@@ -502,30 +503,64 @@ const validateForm = () => {
 }
 
 // PLACE ORDER
-const placeOrder = () => {
+const placeOrder = async () => {
+
+  // 1. Validate first
   if (!validateForm()) return
 
-  toast.success(
-    `✨ Congratulations ${form.firstName}! Your order has been placed successfully.`,
-    {
-      timeout: 4000,
-      position: 'top-center',
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      icon: '🛍️'
-    }
-  )
+  // 2. Build order message
+  const message = `
+🛒 <b>NEW ORDER</b>
 
-  cart.clearCart()
+👤 Name: ${form.firstName} ${form.lastName}
+📧 Email: ${form.email}
 
-  // RESET FORM
-  Object.keys(form).forEach((key) => {
-    form[key] = ''
-  })
+📍 Address:
+${form.address}, ${form.city}, ${form.zip}
 
-  setTimeout(() => {
-    router.push('/')
-  }, 2000)
+💳 Payment:
+Card: **** **** **** ${form.cardNumber.slice(-4)}
+Expiry: ${form.expiry}
+
+📦 Items:
+${cart.items.map(item =>
+  `- ${item.type} x${item.quantity}`
+).join("\n")}
+
+💰 Total: $${cart.totalPrice.toFixed(2)}
+`
+
+  try {
+    // 3. Send Telegram FIRST
+    await sendTelegram(message)
+
+    // 4. Success Toast
+    toast.success(
+      `✨ Congratulations ${form.firstName}! Your order has been placed successfully.`,
+      {
+        timeout: 4000,
+        position: 'top-center',
+        icon: '🛍️'
+      }
+    )
+
+    // 5. Clear cart
+    cart.clearCart()
+
+    // 6. Reset form
+    Object.keys(form).forEach((key) => {
+      form[key] = ''
+    })
+
+    // 7. Redirect
+    setTimeout(() => {
+      router.push('/')
+    }, 2000)
+
+  } catch (error) {
+    console.log(error)
+
+    toast.error("Failed to place order ❌")
+  }
 }
 </script>
