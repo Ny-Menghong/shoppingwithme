@@ -1,7 +1,5 @@
 <template>
   <div :class="DarkMode.isDark ? 'bg-gray-950 text-white min-h-screen' : 'bg-gray-50 text-black min-h-screen'">
-    <Navbar />
-
     <div v-if="product" class="max-w-6xl mx-auto px-4 py-10">
       <div class="grid md:grid-cols-2 gap-10">
         <!-- Images -->
@@ -81,18 +79,26 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
-import Navbar from '../components/Navbar.vue'
+import { useRoute, useRouter } from 'vue-router'
 import Footer from '../components/Footer.vue'
 import { products } from '../data/products'
 import { useCart } from '../stores/useCart'
 import { useDarkMode } from '../stores/DarkMode'
+import { useToast } from 'vue-toastification'
+import { useAuth } from '../stores/auth' // IMPORT AUTH
 
 const route = useRoute()
+const router = useRouter()
+
 const DarkMode = useDarkMode()
 const cart = useCart()
+const toast = useToast()
+const auth = useAuth()
 
-const product = computed(() => products.find(p => p.id === Number(route.params.id)))
+const product = computed(() =>
+  products.find(p => p.id === Number(route.params.id))
+)
+
 const activeImage = ref(product.value?.image[0])
 const qty = ref(1)
 const selectedSize = ref('M')
@@ -100,14 +106,62 @@ const added = ref(false)
 
 const discountedPrice = computed(() => {
   if (!product.value) return 0
+
   const p = product.value
-  return p.discount > 0 ? (p.price - (p.price * p.discount) / 100).toFixed(2) : p.price.toFixed(2)
+
+  return p.discount > 0
+    ? (
+        p.price -
+        (p.price * p.discount) / 100
+      ).toFixed(2)
+    : p.price.toFixed(2)
 })
 
 const handleAdd = () => {
-  for (let i = 0; i < qty.value; i++) cart.addItem(product.value)
+
+  // CHECK LOGIN
+  if (!auth.isLogin) {
+    toast.error(
+      'Our application requires you to create an account.',
+      {
+        timeout: 2000,
+        position: 'bottom-right',
+        pauseOnHover: true,
+        closeOnClick: false,
+        draggable: true,
+
+        onClick() {
+          router.push('/register')
+        }
+      }
+    )
+
+    return
+  }
+
+  // ADD TO CART
+  for (let i = 0; i < qty.value; i++) {
+    cart.addItem({
+      ...product.value,
+      size: selectedSize.value
+    })
+  }
+
   added.value = true
-  setTimeout(() => added.value = false, 2000)
-  alert('Added to cart!')
+
+  setTimeout(() => {
+    added.value = false
+  }, 2000)
+
+  toast.success(
+    `${product.value.item} added to cart 🛒`,
+    {
+      timeout: 2000,
+      position: 'bottom-right',
+      pauseOnHover: true,
+      closeOnClick: true,
+      draggable: true
+    }
+  )
 }
 </script>

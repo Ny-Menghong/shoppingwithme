@@ -1,6 +1,5 @@
 <template>
   <div :class="DarkMode.isDark ? 'bg-gray-950 text-white min-h-screen' : 'bg-gray-50 text-black min-h-screen'">
-    <Navbar />
 
     <div class="max-w-6xl mx-auto px-4 py-10">
       <h1 class="text-3xl font-bold mb-8">Your Cart</h1>

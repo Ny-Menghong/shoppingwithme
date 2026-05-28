@@ -4,4 +4,5 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [vue(), tailwindcss()],
+ // base: '/shoppingwithme/', // 🔥 ត្រូវ match repo name
 })

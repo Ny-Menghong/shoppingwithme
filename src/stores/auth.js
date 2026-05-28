@@ -5,6 +5,7 @@ import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { useToast } from 'vue-toastification'
 export const useAuth = defineStore("auth", () => {
+
     const toast = useToast();
     const router = useRouter();
   // LOGIN STATUS
@@ -67,6 +68,7 @@ export const useAuth = defineStore("auth", () => {
   const logout = () => {
     isLogin.value = false
     localStorage.removeItem("status")
+
     router.push('/')
     toast.success('Logout Successfully .', {
         timeout: 2000,
