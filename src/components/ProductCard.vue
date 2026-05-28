@@ -1,10 +1,19 @@
 <template>
   <div
+    ref="cardRef"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
     @click="goToDetail"
-    class="relative group rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:-translate-y-1"
-    :class="DarkMode.isDark ? 'bg-gray-800 text-white' : 'bg-white text-black'"
+    class="relative group rounded-2xl overflow-hidden cursor-pointer transition-all duration-700 hover:-translate-y-1"
+    :class="[
+      DarkMode.isDark
+        ? 'bg-gray-800 text-white'
+        : 'bg-white text-black',
+
+      isVisible
+        ? 'opacity-100 translate-y-0'
+        : 'opacity-0 translate-y-10'
+    ]"
     style="box-shadow: 0 2px 12px rgba(0,0,0,0.08)"
   >
     <!-- Image Container -->
@@ -82,7 +91,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useDarkMode } from '../stores/DarkMode'
 import { useCart } from '../stores/useCart'
@@ -92,41 +101,69 @@ import { useAuth } from '../stores/auth'
 const props = defineProps({
   product: Object
 })
-const auth = useAuth();
+
+const auth = useAuth()
 const DarkMode = useDarkMode()
 const cart = useCart()
 const router = useRouter()
 const toast = useToast()
 
-
 const hovered = ref(false)
+
+const cardRef = ref(null)
+const isVisible = ref(false)
+
+onMounted(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true
+      }
+    },
+    {
+      threshold: 0.2
+    }
+  )
+
+  if (cardRef.value) {
+    observer.observe(cardRef.value)
+  }
+})
 
 const goToDetail = () => {
   router.push(`/product/${props.product.id}`)
 }
+
 const discountedPrice = computed(() => {
   const p = props.product
+
   return p.discount > 0
     ? (p.price - (p.price * p.discount) / 100).toFixed(2)
     : p.price.toFixed(2)
 })
 
 const addToCart = () => {
-  if(!auth.isLogin){
-    toast.error('Our application require you to have acc(just example acc)', {
-      timeout: 2000,
-      position: 'bottom-right',
-      pauseOnHover: true,
-      closeOnClick: false,
-      draggable: true,
-      onclick(){
-        router.push('/register');
+  if (!auth.isLogin) {
+    toast.error(
+      'Our application require you to have acc(just example acc)',
+      {
+        timeout: 2000,
+        position: 'bottom-right',
+        pauseOnHover: true,
+        closeOnClick: false,
+        draggable: true,
+
+        onclick() {
+          router.push('/register')
+        }
       }
-    })
-    return;
+    )
+
+    return
   }
 
   cart.addItem(props.product)
+
   toast.success(`${props.product.item} added to cart 🛒`, {
     timeout: 2000,
     position: 'bottom-right',

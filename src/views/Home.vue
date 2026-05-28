@@ -27,10 +27,10 @@
     <section class="max-w-7xl mx-auto px-4 pb-14">
       <h2 class="text-2xl font-bold mb-6">Shop by Category</h2>
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <RouterLink
+        <div
           v-for="cat in categoryCards"
           :key="cat.label"
-          to="/shop"
+          @click="setGender(cat.label)"
           class="relative overflow-hidden rounded-2xl aspect-video group cursor-pointer"
         >
           <img :src="cat.img" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -40,7 +40,7 @@
               <h3 class="text-white text-xl font-bold">{{ cat.label }}</h3>
             </div>
           </div>
-        </RouterLink>
+        </div>
       </div>
     </section>
 
@@ -56,8 +56,15 @@ import ProductCard from '../components/ProductCard.vue'
 import { products } from '../data/products'
 import { useDarkMode } from '../stores/DarkMode'
 import Gucci from '../components/Gucci.vue'
-
+import { useMenuFilter } from '../stores/MenuFilter.js'
+import { useRouter } from 'vue-router'
 const DarkMode = useDarkMode()
+const menu = useMenuFilter()
+const route = useRouter();
+const setGender=(cat)=>{
+  menu.setCategory(cat)
+  route.push('/shop')
+}
 const newArrivals = computed(() => products.filter(p => p.isNewIn).slice(0, 8))
 
 const categoryCards = [

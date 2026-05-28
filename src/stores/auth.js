@@ -4,10 +4,8 @@ import { useRouter } from "vue-router"
 import { useToast } from "vue-toastification"
 import { sendTelegram } from "../services/telegram"
 export const useAuth = defineStore("auth", () => {
-
   const toast = useToast()
   const router = useRouter()
-
   // LOGIN STATUS
   const isLogin = ref(localStorage.getItem("status") === "true")
 

@@ -385,8 +385,6 @@
         </div>
       </div>
     </div>
-
-    <Footer />
   </div>
 </template>
 
@@ -394,10 +392,6 @@
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
-
-import Navbar from '../components/Navbar.vue'
-import Footer from '../components/Footer.vue'
-
 import { useCart } from '../stores/useCart'
 import { useDarkMode } from '../stores/DarkMode'
 import { sendTelegram } from '../services/telegram.js'
@@ -524,7 +518,7 @@ Expiry: ${form.expiry}
 
 📦 Items:
 ${cart.items.map(item =>
-  `- ${item.type} x${item.quantity}`
+  `- ${item.type} x${item.quantity} - id :${item.id}`
 ).join("\n")}
 
 💰 Total: $${cart.totalPrice.toFixed(2)}
