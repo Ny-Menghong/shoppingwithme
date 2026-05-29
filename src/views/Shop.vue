@@ -6,14 +6,38 @@
         : 'bg-gray-50 text-black min-h-screen'
     "
   >
-
+        <div v-if="searchStore.submittedSearch" class="mx-4 my-3">
+          <div class="flex items-center border-b">
+            <!-- INPUT -->
+            <input
+              v-model="searchStore.search"
+              @keyup.enter="(handleSearch())"
+              type="text"
+              placeholder="What are you searching for?"
+              class="w-full outline-none md:text-xl text-shadow-2xs font-light"
+            />
+            <!-- SEARCH ICON -->
+            <button
+              @click="(handleSearch())"
+              class="text-2xl mr-5 hover:scale-110 transition duration-300"
+            >
+              <i class="bi bi-search"></i>
+            </button>
+            <!-- CLOSE -->
+            <button
+              @click="searchStore.submittedSearch = ''"
+              class="text-4xl p-1 px-2 rounded-full hover:bg-gray-200 transition duration-500"
+            >
+              ×
+            </button>
+          </div>
+        </div>
     <div class="max-w-7xl mx-auto px-4 py-10">
       <!-- Header -->
       <div class="mb-8">
         <h1 class="text-3xl font-bold">Shop</h1>
         <p class="text-gray-400 mt-1">{{ filtered.length }} products</p>
       </div>
-
       <div class="flex gap-6">
         <!-- Filters Sidebar -->
         <aside class="hidden lg:block w-56 flex-shrink-0">
@@ -22,7 +46,6 @@
             class="rounded-2xl p-5 sticky top-24 shadow-sm"
           >
             <h3 class="font-semibold mb-4">Filters</h3>
-
             <!-- Category -->
             <div class="mb-5">
               <p class="text-xs uppercase tracking-widest text-gray-400 mb-2">
@@ -144,7 +167,10 @@ import { products } from "../data/products";
 import { useDarkMode } from "../stores/DarkMode";
 import { useSearchStore } from "../stores/SearchStore";
 import { useMenuFilter } from "../stores/MenuFilter";
-
+const handleSearch = () => {
+  if (!searchStore.search.trim()) return;
+  searchStore.submitSearch();
+};
 const DarkMode = useDarkMode();
 const searchStore = useSearchStore();
 const menu = useMenuFilter();
@@ -186,20 +212,16 @@ const filtered = computed(() => {
   // SEARCH
   const search = searchStore.submittedSearch?.toLowerCase().trim();
   if (search) {
+
     list = list.filter(
       (p) =>
-        (p.type ?? "").toLowerCase().includes(search) ||
-        (p.category_for ?? "").toLowerCase().includes(search) ||
-        (p.item ?? "").toLowerCase().includes(search) ||
-        (p.description ?? "").toLowerCase().includes(search),
+        (p.name ?? "").toLowerCase().includes(search)
     );
   }
-
   // CATEGORY
   if (selectedCat.value !== "All") {
     list = list.filter((p) => p.category_for === selectedCat.value);
   }
-
   // TYPE
   if (selectedType.value !== "All") {
     list = list.filter((p) => p.type === selectedType.value);
@@ -218,7 +240,6 @@ const filtered = computed(() => {
   } else if (sortBy.value === "discount") {
     list.sort((a, b) => b.discount - a.discount);
   }
-
   return list;
 });
 </script>

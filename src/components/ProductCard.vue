@@ -63,12 +63,11 @@
 
     <!-- Info -->
     <div class="p-3">
-      <p class="text-xs text-gray-400 uppercase tracking-wider mb-1">
-        {{ product.category_for }} · {{ product.type }}
+      <p class="text-xs line-clamp-1 text-gray-400 uppercase tracking-wider mb-1">
+        {{ product.name }}
       </p>
-
       <p class="text-sm font-medium truncate">
-        {{ product.item }}
+        {{ product.category_for }} · {{ product.type }}
       </p>
 
       <div class="flex items-center gap-2 mt-1">
