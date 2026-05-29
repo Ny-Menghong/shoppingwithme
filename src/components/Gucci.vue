@@ -6,7 +6,7 @@
         <div class="space-y-3 md:w-1/3">
           <div class="space-y-2">
             <p class="text-2xl font-bold relative">
-              NEW SHOES
+              NEW SHOES COMMING SOON
               <span class="absolute -left-3 top-2 w-1.5 h-1.5rounded-full animate-pulse"></span>
             </p>
           </div>
@@ -14,7 +14,7 @@
           <p class="text-xs text-gray-500">Sneakers collection 2026.</p>
           <p class="text-xs text-gray-500">A description is a spoken or written account that aims to create a vivid picture of a person, place, object, or event using sensory details and characteristics. </p>
         </div>
-  
+
         <!-- CENTER PRODUCT -->
         <div class="relative md:w-1/3 flex justify-center items-center">
           <div class="absolute w-80 h-80 bg-gradient-to-tr from-gray-200 to-white rounded-full blur-3xl opacity-60 animate-pulse"></div>
