@@ -137,7 +137,7 @@
             v-for="item in similarProducts"
             :key="item.id"
             class="min-w-[180px] rounded-xl p-2 flex-shrink-0 snap-start transition-all duration-300 ease-in-out
-             hover:shadow-xl hover:-translate-y-1 hover:border-gray-400"
+             hover:shadow-xl hover:-translate-y-1 hover:border-gray-400 cursor-pointer"
             @click="goToProduct(item.id)"
           >
             <img
