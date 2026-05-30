@@ -151,7 +151,6 @@ const addToCart = () => {
         pauseOnHover: true,
         closeOnClick: false,
         draggable: true,
-
         onclick() {
           router.push('/register')
         }

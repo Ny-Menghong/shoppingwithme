@@ -21,10 +21,8 @@
       <p class="text-sm text-gray-400 mb-6">
         Join us and start shopping
       </p>
-
       <!-- Form -->
       <div class="space-y-4">
-
         <!-- Name -->
         <div class="grid grid-cols-2 gap-3">
 

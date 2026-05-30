@@ -141,10 +141,8 @@ const email = ref('')
 const password = ref('')
 const remember = ref(false)
 const showPass = ref(false)
-
 // Login Function
 const login = () => {
-
   // Validation
   if (!email.value || !password.value) {
     toast.error('Please fill all fields')
